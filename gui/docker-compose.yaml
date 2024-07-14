@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  pgvector:
+    image: pgvector/pgvector:pg16
+    container_name: pgvector-container
+    environment:
+      POSTGRES_USER: langchain
+      POSTGRES_PASSWORD: langchain
+      POSTGRES_DB: langchain
+    ports:
+      - "6024:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+    networks:
+      - app-network
+
+  streamlit-app:
+    build: .
+    container_name: streamlit-app
+    ports:
+      - "8501:8501"
+    depends_on:
+      - pgvector
+    environment:
+      - DATABASE_URL=postgresql://langchain:langchain@pgvector:5432/langchain
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    internal: true
+    name: gui_app-network
+
+volumes:
+  pgdata:
