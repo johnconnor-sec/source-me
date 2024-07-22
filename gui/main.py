@@ -1,8 +1,6 @@
 import streamlit as st
 from streamlit_multipage import MultiPage
 from streamlit_extras.switch_page_button import switch_page
-import streamlit_shadcn_ui as ui
-
 
 app = MultiPage()
 
