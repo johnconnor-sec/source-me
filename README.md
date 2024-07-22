@@ -2,34 +2,6 @@
 
 ## Table of Contents
 [Introduction](README.md#introduction)|[Features](README.md#features)|[Prerequisites](README.md#prerequisites)|[Installation](README.md#installation)|[Usage](README.md#usage)|[CLI Version](README.md#cli-version)|[GUI Version](README.md#gui-version)|[Project Structure](README.md#project-structure)|[Configuration](README.md#configuration)|[Development](README.md#development)|[Contributing](README.md#contributing)|[License](README.md#license)|[Contact](README.md#contact)
-# Local RAG AI Assistant
-
-## Table of Contents
-- [Introduction](#introduction)
-- [Program Objectives](#program-objectives)
-- [Features](#features)
-- [Best Practices for Usage](#best-practices-for-usage)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [CLI Version](#cli-version)
-  - [GUI Version](#gui-version)
-- [Project Structure](#project-structure)
-- [Configuration](#configuration)
-- [Development](#development)
-- [Technology Stack](#technology-stack)
-- [Environment Variables](#environment-variables)
-- [Troubleshooting](#troubleshooting)
-- [API Documentation](#api-documentation)
-- [Performance](#performance)
-- [Security Considerations](#security-considerations)
-- [Future Roadmap](#future-roadmap)
-- [Contributing](#contributing)
-- [Acknowledgements](#acknowledgements)
-- [Versioning](#versioning)
-- [License](#license)
-- [Contact](#contact)
-- [Screenshots](#screenshots)
 
 ## Introduction
 
