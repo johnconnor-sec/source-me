@@ -1,13 +1,59 @@
 # Local RAG AI Assistant
 
 ## Table of Contents
-[Introduction](#introduction)|[Features](#features)|[Prerequisites](README.md#prerequisites)|[Installation](#installation)|[Usage](#usage)|[CLI Version](#cli-version)|[GUI Version](#gui-version)|[Project Structure](#project-structure)|[Configuration](#configuration)|[Development](#development)|[Contributing](#contributing)|[License](#license)|[Contact](#contact)
+[Introduction](README.md#introduction)|[Features](README.md#features)|[Prerequisites](README.md#prerequisites)|[Installation](README.md#installation)|[Usage](README.md#usage)|[CLI Version](README.md#cli-version)|[GUI Version](README.md#gui-version)|[Project Structure](README.md#project-structure)|[Configuration](README.md#configuration)|[Development](README.md#development)|[Contributing](README.md#contributing)|[License](README.md#license)|[Contact](README.md#contact)
+# Local RAG AI Assistant
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Program Objectives](#program-objectives)
+- [Features](#features)
+- [Best Practices for Usage](#best-practices-for-usage)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Usage](#usage)
+  - [CLI Version](#cli-version)
+  - [GUI Version](#gui-version)
+- [Project Structure](#project-structure)
+- [Configuration](#configuration)
+- [Development](#development)
+- [Technology Stack](#technology-stack)
+- [Environment Variables](#environment-variables)
+- [Troubleshooting](#troubleshooting)
+- [API Documentation](#api-documentation)
+- [Performance](#performance)
+- [Security Considerations](#security-considerations)
+- [Future Roadmap](#future-roadmap)
+- [Contributing](#contributing)
+- [Acknowledgements](#acknowledgements)
+- [Versioning](#versioning)
+- [License](#license)
+- [Contact](#contact)
+- [Screenshots](#screenshots)
 
 ## Introduction
 
 The Local RAG AI Assistant is a powerful tool that combines document management with AI-powered interactions. It allows users to process various document types, perform intelligent searches across their document collection, and engage in meaningful dialogues based on the processed information. All data is stored locally, ensuring privacy and security.
 
 This project is built using Python, leveraging technologies such as Streamlit, LangChain, and Ollama for embeddings and chat completions. It uses a local PostgreSQL database for data storage.
+
+## Program Objectives
+
+The Local RAG AI Assistant aims to:
+
+1. **Enhance Document Management**: Provide an efficient way to process, store, and retrieve information from various document types.
+
+2. **Facilitate Knowledge Discovery**: Enable users to uncover insights and connections across their document collection that might not be immediately apparent.
+
+3. **Offer Intelligent Assistance**: Leverage AI to provide context-aware responses and assist with complex queries related to the user's documents.
+
+4. **Ensure Data Privacy**: Keep all data and processing local, giving users full control over their information.
+
+5. **Streamline Workflow**: Integrate document analysis, search, and AI-powered interactions into a single, user-friendly interface.
+
+6. **Support Data-Driven Decision Making**: Help users make informed decisions by providing quick access to relevant information from their document collection.
+
+7. **Promote Customization and Extensibility**: Offer a flexible framework that can be adapted to various use cases and extended with new features.
 
 ## Features
 
@@ -18,6 +64,34 @@ This project is built using Python, leveraging technologies such as Streamlit, L
 - **Dual Interface**: Choose between a CLI and a GUI (Streamlit) version.
 - **Data Analysis**: Analyze CSV files using PandasAI integration.
 - **Customizable**: Built with modularity in mind for easy modifications and extensions.
+
+## Best Practices for Usage
+
+To get the most out of the Local RAG AI Assistant, consider the following best practices:
+
+1. **Organize Your Documents**: Before uploading, organize your documents into logical categories. This can help with more efficient retrieval and analysis.
+
+2. **Use Descriptive File Names**: When uploading documents, use clear and descriptive file names. This can aid in document management and search.
+
+3. **Chunk Large Documents**: If you have very large documents, consider breaking them into smaller, topic-focused files. This can improve processing speed and retrieval accuracy.
+
+4. **Utilize the Search Function**: Before asking questions, try using the search function to find relevant documents. This can provide context for more specific questions.
+
+5. **Ask Specific Questions**: When interacting with the AI, ask clear and specific questions. This helps the system provide more accurate and relevant responses.
+
+6. **Iterate on Queries**: If you don't get the desired information in the first response, try rephrasing your question or breaking it down into smaller parts.
+
+7. **Regularly Update Your Document Collection**: Keep your document collection up-to-date by adding new documents and removing outdated ones. This ensures the AI has the most current information to work with.
+
+8. **Experiment with Different Document Types**: Try using a mix of document types (TXT, MD, PDF, CSV) to see how the system handles different formats and what works best for your needs.
+
+9. **Use Data Analysis Features**: For CSV files, take advantage of the PandasAI integration to perform detailed data analysis and gain insights from your structured data.
+
+10. **Provide Feedback**: If you encounter any issues or have suggestions for improvement, use the provided channels to give feedback. This helps in continually improving the system.
+
+11. **Monitor System Performance**: Keep an eye on processing times and system resource usage, especially when working with large document collections. This can help you optimize your usage.
+
+12. **Ensure Regular Backups**: While all data is stored locally, it's good practice to regularly backup your document collection and database.
 
 ## Prerequisites
 
@@ -31,7 +105,7 @@ This project is built using Python, leveraging technologies such as Streamlit, L
 1. Clone the repository:
    ```
    git clone https://github.com/yourusername/local-rag-ai-assistant.git
-   cd source.me
+   cd local-rag-ai-assistant
    ```
 
 2. Set up the environment:
@@ -112,6 +186,8 @@ To use the GUI (Streamlit) version of the assistant:
 │   └── utils
 │       ├── assistant.py
 │       └── __init__.py
+├── personal_rag.code-workspace
+└── project_tree.txt
 ```
 
 ## Configuration
