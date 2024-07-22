@@ -5,3 +5,10 @@ enableXsrfProtection = true
 [browser]
 serverAddress = "localhost"
 serverPort = 8501
+
+[theme]
+primaryColor="#be3ef5"
+backgroundColor="#1e171e"
+secondaryBackgroundColor="#252327"
+textColor="#88d453"
+font="monospace"

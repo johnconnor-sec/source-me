@@ -3,7 +3,7 @@ import ast
 import psycopg2
 import psycopg2.extras
 from psycopg2 import sql
-import ollama 
+import ollama
 from langchain_community.document_loaders import TextLoader, UnstructuredMarkdownLoader, PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from typing import List, Tuple
@@ -223,12 +223,14 @@ def list_documents():
             cur.execute(
                 sql.SQL("SELECT DISTINCT metadata->>'source' FROM documents")
             )
-            documents = cur.fetchall()
+            documents = [doc[0] for doc in cur.fetchall()]
+        return documents
         print(colorize_output("Stored documents:", "yellow"))
         for doc in documents:
             print(colorize_output(f"- {doc[0]}", "white"))
     except psycopg2.Error as e:
         print(f"Error listing documents: {e}")
+        return []
     finally:
         conn.close()
 

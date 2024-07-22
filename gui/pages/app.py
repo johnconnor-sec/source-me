@@ -1,13 +1,16 @@
 import streamlit as st
 import os
-from pages.assistant import (
+from utils.assistant import (
     process_document, forget_document, list_documents, 
     search_documents, stream_response, recall, DB_PARAMS, EMBEDDING_SIZE
 )
 
 st.set_page_config(page_title="Local RAG AI Assistant", layout="wide")
 
-st.title("Local RAG AI Assistant")
+logo = os.path.join(os.getcwd(), "media/JC-Profile-Update.png")
+st.image(logo, width=100)
+
+st.header("source.me")
 
 # Sidebar for document management
 st.sidebar.header("Document Management")
@@ -51,7 +54,7 @@ if st.sidebar.button("Search Documents"):
         st.sidebar.write("---")
 
 # Main chat interface
-st.header("Chat with your documents")
+st.subheader("saveyourdatafromthedatafarms")
 
 # Initialize chat history
 if "messages" not in st.session_state:
