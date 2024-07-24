@@ -5,6 +5,8 @@ import psycopg2.extras
 from psycopg2 import sql
 import ollama 
 from langchain_community.document_loaders import TextLoader, UnstructuredMarkdownLoader, PyPDFLoader
+from langchain.document_loaders.base import BaseLoader
+from langchain.docstore.document import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from typing import List, Tuple
 from tqdm import tqdm
@@ -29,7 +31,22 @@ EMBEDDING_MODEL = "nomic-embed-text"
 EMBEDDING_SIZE = 768  # Adjust based on the model's output
 
 # Chat model configuration
-CHAT_MODEL = "llama3"
+CHAT_MODEL = "llama3.1"
+
+class CustomMarkdownLoader(BaseLoader):
+    def __init__(self, file_path: str):
+        self.file_path = file_path
+
+    def load(self) -> list[Document]:
+        try:
+            with open(self.file_path, 'r', encoding='utf-8') as file:
+                content = file.read()
+        except UnicodeDecodeError:
+            # If UTF-8 fails, try with ISO-8859-1
+            with open(self.file_path, 'r', encoding='iso-8859-1') as file:
+                content = file.read()
+        metadata = {"source": self.file_path}
+        return [Document(page_content=content, metadata=metadata)]
 
 def connect_db():
     try:
@@ -195,6 +212,49 @@ def process_document(file_path: str):
         print(f"Error processing file: {e}")
         print(f"Debug: Exception type: {type(e)}")
         print(f"Stack trace: {traceback.format_exc()}")
+        
+def process_directory(directory_path: str):
+    print(f"Debug: Starting to process directory: {directory_path}")
+    
+    directory_path = os.path.expanduser(os.path.expandvars(directory_path))
+    
+    if not os.path.exists(directory_path):
+        print(f"Error: Directory does not exist at path: {directory_path}")
+        return
+    
+    try:
+        for root, _, files in os.walk(directory_path):
+            for file in files:
+                file_path = os.path.join(root, file)
+                try:
+                    if file.lower().endswith('.md'):
+                        loader = CustomMarkdownLoader(file_path)
+                    else:
+                        # Skip non-markdown files
+                        print(f"Skipping non-markdown file: {file_path}")
+                        continue
+                    
+                    documents = loader.load()
+                    
+                    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+                    chunks = text_splitter.split_documents(documents)
+                    
+                    for i, chunk in enumerate(chunks):
+                        try:
+                            store_document(chunk.page_content, {"source": file_path, "chunk_index": i})
+                        except Exception as e:
+                            print(f"Error storing chunk {i} from {file_path}: {e}")
+                    
+                    print(f"Processed file: {file_path}")
+                except Exception as e:
+                    print(f"Error processing file {file_path}: {e}")
+        
+        print(f"Finished processing directory: {directory_path}")
+        print(emoji.emojize(":star:"))
+    except Exception as e:
+        print(f"Error processing directory: {e}")
+        print(f"Debug: Exception type: {type(e)}")
+        print(f"Stack trace: {traceback.format_exc()}")
 
 def forget_document(file_path: str):
     conn = connect_db()
@@ -341,13 +401,13 @@ def stream_response(prompt: str, context: List[dict]):
 
 def main():
     initialize_db()
-    # Call this function before processing any documents
     update_db_schema()
     
     print(colorize_output("Welcome to the Local RAG AI Agent!", "yellow"))
     print(colorize_output("Commands:", "yellow"))
     print(colorize_output("- 'exit' to quit", "white"))
     print(colorize_output("- 'process' to add a document", "white"))
+    print(colorize_output("- 'process_dir' to add all documents in a directory", "white"))
     print(colorize_output("- 'forget' to remove a document", "white"))
     print(colorize_output("- 'list' to show all stored documents", "white"))
     print(colorize_output("- 'search' to find relevant documents", "white"))
@@ -361,6 +421,9 @@ def main():
         elif user_input.lower() == 'process':
             file_path = input(colorize_output("Enter the path to the document: ", "white"))
             process_document(file_path)
+        elif user_input.lower() == 'process_dir':
+            dir_path = input(colorize_output("Enter the path to the directory: ", "white"))
+            process_directory(dir_path)
         elif user_input.lower() == 'forget':
             file_path = input(colorize_output("Enter the path of the document to forget: ", "white"))
             forget_document(file_path)
@@ -375,3 +438,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
