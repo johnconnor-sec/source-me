@@ -69,7 +69,7 @@ To get the most out of the Local RAG AI Assistant, consider the following best p
 
 - Python 3.9+
 - Docker and Docker Compose
-- Ollama (for embeddings and chat completions) ![](https://ollama.com)
+- Ollama (for embeddings and chat completions) (https://ollama.com)
 - PostgreSQL with pgvector extension
 
 ## Installation
