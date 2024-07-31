@@ -140,9 +140,28 @@ To use the GUI (Streamlit) version of the assistant:
 ```
 .
 ├── cli
-│   ├── assistant.py
-│   ├── README.md
-│   └── requirements.txt
+|   | main.py
+|   | config.py
+|   | database/
+│   ├── __init__.py
+│   ├── connection.py
+│   └── operations.py
+├── embedding/
+│   ├── __init__.py
+│   └── embed.py
+├── document_processing/
+│   ├── __init__.py
+│   ├── loader.py
+│   └── splitter.py
+├── retrieval/
+│   ├── __init__.py
+│   └── similarity.py
+├── chat/
+│   ├── __init__.py
+│   └── ollama_chat.py
+└── utils/
+    ├── __init__.py
+    └── output.py
 ├── gui
 │   ├── config.toml
 │   ├── docker-compose.yaml
@@ -158,8 +177,6 @@ To use the GUI (Streamlit) version of the assistant:
 │   └── utils
 │       ├── assistant.py
 │       └── __init__.py
-├── personal_rag.code-workspace
-└── project_tree.txt
 ```
 
 ## Configuration
