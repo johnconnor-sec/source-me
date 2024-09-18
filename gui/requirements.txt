@@ -1,5 +1,5 @@
 colorama==0.4.6
-langchain==0.2.7
+langchain==0.2.10
 langchain_community==0.2.7
 emoji==2.12.1
 matplotlib==3.8.4
